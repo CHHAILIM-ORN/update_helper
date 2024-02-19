@@ -80,7 +80,7 @@ class _StatefulAlertState extends State<_StatefulAlert> {
           buttons: [
             Container(
               width: 190,
-              margin: EdgeInsets.only(bottom: 10),
+              margin: const EdgeInsets.only(bottom: 10),
               child: BaseButton(
                 text: widget.okButtonText,
                 onPressed: () async {
