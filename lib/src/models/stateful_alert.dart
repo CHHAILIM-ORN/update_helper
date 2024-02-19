@@ -40,10 +40,16 @@ class _StatefulAlertState extends State<_StatefulAlert> {
   @override
   Widget build(BuildContext context) {
     return BoxWDialog(
-      title: widget.title,
       content: Column(
         mainAxisSize: MainAxisSize.min,
         children: [
+          Text(
+            widget.title,
+            style: const TextStyle(
+              fontSize: 20,
+              fontWeight: FontWeight.bold,
+            ),
+          ),
           const SizedBox(height: 20),
           Text(
             (widget.forceUpdate ? widget.forceUpdateContent : widget.content)
@@ -51,27 +57,7 @@ class _StatefulAlertState extends State<_StatefulAlert> {
                 .replaceAll('%latestVersion', widget.updatePlatformConfig.latestVersion!),
             style: const TextStyle(fontSize: 15),
           ),
-          // if (widget.changelogs.isNotEmpty) ...[
-          //   const Center(child: SizedBox(width: 230, child: Divider())),
-          //   Text(
-          //     '${widget.changelogsText}:',
-          //     style: const TextStyle(fontSize: 15),
-          //   ),
-          //   const SizedBox(height: 4),
-          // ],
-          // if (widget.changelogs.isNotEmpty)
-          //   Column(
-          //     crossAxisAlignment: CrossAxisAlignment.start,
-          //     children: [
-          //       for (final text in widget.changelogs) ...[
-          //         Text(
-          //           '- $text',
-          //           style: const TextStyle(fontSize: 13),
-          //         ),
-          //         const SizedBox(height: 4),
-          //       ]
-          //     ],
-          //   ),
+          const SizedBox(height: 10),
         ],
       ),
       buttons: [
