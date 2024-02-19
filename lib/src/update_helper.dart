@@ -6,6 +6,8 @@ import 'package:universal_platform/universal_platform.dart';
 import 'package:update_helper/src/utils/open_store.dart';
 import 'package:url_launcher/url_launcher_string.dart';
 
+import 'utils/base_button.dart';
+
 part 'models/stateful_alert.dart';
 part 'models/update_platform_config.dart';
 
@@ -96,8 +98,7 @@ class UpdateHelper {
   }) async {
     _isDebug = isDebug;
 
-    UpdatePlatformConfig config =
-        updateConfig.defaultConfig ?? UpdatePlatformConfig();
+    UpdatePlatformConfig config = updateConfig.defaultConfig ?? UpdatePlatformConfig();
     if (UniversalPlatform.isAndroid) {
       config = config.copyWith(updateConfig.android);
     } else if (UniversalPlatform.isMacOS) {
@@ -142,8 +143,7 @@ class UpdateHelper {
       _isForceUpdate = true;
     }
 
-    if (!onlyShowDialogWhenBanned ||
-        (onlyShowDialogWhenBanned && forceUpdate)) {
+    if (!onlyShowDialogWhenBanned || (onlyShowDialogWhenBanned && forceUpdate)) {
       // ignore: use_build_context_synchronously
       await showDialog(
         context: context,

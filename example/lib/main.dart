@@ -32,36 +32,12 @@ class _MyAppState extends State<MyApp> {
           defaultConfig: UpdatePlatformConfig(latestVersion: '0.0.6'),
         ),
         changelogs: ['Improve performances', 'Update UI'],
+        content: "New version is available!",
+        forceUpdateContent: "New version is available!",
+        okButtonText: "Update",
+        forceUpdate: true,
         isDebug: true,
       );
-
-      print('Don\'t show dialog because [onlyShowDialogWhenForce] is `true`'
-          'but [forceUpdate] is `false`');
-      if (mounted) {
-        await UpdateHelper.instance.initial(
-          context: context,
-          updateConfig: UpdateConfig(
-            defaultConfig: UpdatePlatformConfig(latestVersion: '0.0.6'),
-          ),
-          onlyShowDialogWhenBanned: true,
-          changelogs: ['Improve performances', 'Update UI'],
-          isDebug: true,
-        );
-      }
-
-      print('Show dialog because [onlyShowDialogWhenForce] is `true`'
-          'and [forceUpdate] is `true`');
-      if (mounted) {
-        await UpdateHelper.instance.initial(
-          context: context,
-          updateConfig: UpdateConfig(
-            defaultConfig: UpdatePlatformConfig(latestVersion: '0.0.6'),
-          ),
-          onlyShowDialogWhenBanned: true,
-          forceUpdate: true,
-          isDebug: true,
-        );
-      }
     });
   }
 

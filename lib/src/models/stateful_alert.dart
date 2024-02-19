@@ -44,66 +44,68 @@ class _StatefulAlertState extends State<_StatefulAlert> {
       content: Column(
         mainAxisSize: MainAxisSize.min,
         children: [
+          const SizedBox(height: 20),
           Text(
             (widget.forceUpdate ? widget.forceUpdateContent : widget.content)
                 .replaceAll('%currentVersion', widget.currentVersion)
-                .replaceAll('%latestVersion',
-                    widget.updatePlatformConfig.latestVersion!),
+                .replaceAll('%latestVersion', widget.updatePlatformConfig.latestVersion!),
             style: const TextStyle(fontSize: 15),
           ),
-          if (widget.changelogs.isNotEmpty) ...[
-            const Center(child: SizedBox(width: 230, child: Divider())),
-            Text(
-              '${widget.changelogsText}:',
-              style: const TextStyle(fontSize: 15),
-            ),
-            const SizedBox(height: 4),
-          ],
-          if (widget.changelogs.isNotEmpty)
-            Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                for (final text in widget.changelogs) ...[
-                  Text(
-                    '- $text',
-                    style: const TextStyle(fontSize: 13),
-                  ),
-                  const SizedBox(height: 4),
-                ]
-              ],
-            ),
-          const SizedBox(height: 20),
+          // if (widget.changelogs.isNotEmpty) ...[
+          //   const Center(child: SizedBox(width: 230, child: Divider())),
+          //   Text(
+          //     '${widget.changelogsText}:',
+          //     style: const TextStyle(fontSize: 15),
+          //   ),
+          //   const SizedBox(height: 4),
+          // ],
+          // if (widget.changelogs.isNotEmpty)
+          //   Column(
+          //     crossAxisAlignment: CrossAxisAlignment.start,
+          //     children: [
+          //       for (final text in widget.changelogs) ...[
+          //         Text(
+          //           '- $text',
+          //           style: const TextStyle(fontSize: 13),
+          //         ),
+          //         const SizedBox(height: 4),
+          //       ]
+          //     ],
+          //   ),
         ],
       ),
       buttons: [
         Buttons(
           axis: Axis.horizontal,
           buttons: [
-            BoxWButton(
-              width: 100,
-              child: Text(widget.okButtonText),
-              onPressed: () async {
-                String packageName = widget.packageInfo.packageName;
+            Container(
+              width: 190,
+              margin: EdgeInsets.only(bottom: 10),
+              child: BaseButton(
+                text: widget.okButtonText,
+                onPressed: () async {
+                  String packageName = widget.packageInfo.packageName;
 
-                // For testing
-                if (updateHelper._isDebug && updateHelper.packageName != '') {
-                  packageName = updateHelper.packageName;
-                }
+                  // For testing
+                  if (updateHelper._isDebug && updateHelper.packageName != '') {
+                    packageName = updateHelper.packageName;
+                  }
 
-                try {
-                  await openStoreImpl(
-                    packageName,
-                    widget.updatePlatformConfig.storeUrl,
-                    (debugLog) {
-                      updateHelper._print(debugLog);
-                    },
-                  );
-                } catch (e) {
-                  setState(() {
-                    errorText = e.toString();
-                  });
-                }
-              },
+                  try {
+                    await openStoreImpl(
+                      packageName,
+                      widget.updatePlatformConfig.storeUrl,
+                      (debugLog) {
+                        updateHelper._print(debugLog);
+                      },
+                    );
+                  } catch (e) {
+                    setState(() {
+                      errorText = e.toString();
+                    });
+                  }
+                },
+              ),
             ),
             if (!widget.forceUpdate)
               BoxWOutlinedButton(
